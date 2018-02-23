@@ -9,7 +9,11 @@ Copied from [corelight/bro-cheatsheets](https://github.com/corelight/bro-cheatsh
 
 Copyright [Corelight, Inc](https://www.corelight.com/)
 
+## Useful-Command-Line-Utilities.pdf and useful_cli_utilities.txt
+Descriptions of a couple command-line test processing utilities which are useful for looking at Bro logs.  This info is taken directly from the workshop slides, but included here as it may be useful as a references for some of the exercises.
+
 ## bro-cheat-sheet.pdf
 This one deals almost entirely with Bro command line arguments and scripting.  It may come in handy for Exercise 3 in particular when you start modifying and writing your own scripts.
 
-Copied from [bro/cheatsheet](https://github.com/bro/cheat-sheet) and redistributed via [Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported ](https://creativecommons.org/licenses/by-nc-sa/3.0/)license.
+Copied from [bro/cheatsheet](https://github.com/bro/cheat-sheet) and redistributed via [Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported ](https://creativecommons.org/licenses/by-nc-sa/3.0/) license
+
