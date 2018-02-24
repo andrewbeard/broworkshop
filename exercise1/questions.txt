@@ -1,0 +1,7 @@
+What's the network's main DNS server?  Which host is not using this DNS server?
+
+What IP address is hosting www.qrz.com?  What about aa9pw.com?  What’s the difference between these two sites?
+
+What two external IP addresses are communicated with the most?
+
+What is the most common application protocol present in the packet capture?  What percentage of the connections does this protocol represent?

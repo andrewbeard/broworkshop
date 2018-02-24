@@ -1,0 +1,57 @@
+Q: What's the network's main DNS server?  Which host is not using this DNS server?
+A: Take a look at dns.log.  The server should be the responder, and assuming one connection is one DNS query we can get a count of DNS queries by server by running the following:
+
+cat dns.log | bro-cut id.resp_h | sort | uniq -c | sort -r -n
+
+The top result with 54 DNS queries is 192.168.1.14, our DNS server.
+
+The second part involves a little more domain knowledge.  The next two IP addresses are ff02::fb (multicast DNS for IPv6) and 224.0.0.251 (multicast DNS for IPv4). These queries don't involve a server, and are pretty common internal to a network (especially with Apple devices).  Two IP addresses stand out, though: 8.8.8.8 and 8.8.4.4.  These are Google's public DNS servers.  To find the client run:
+
+grep 8.8.8.8 dns.log
+
+All three requests come from the same host, 192.168.1.143.
+
+
+Q: What IP address is hosting www.qrz.com?  What about aa9pw.com?  What’s the difference between these two sites?
+A: The easy way to do this one is to just grep for the hostnames in all the log files, like so:
+
+grep www.qrz.com *.log
+
+The dns and ssl logs both indicate the host is at 23.23.229.197
+
+grep aa9pw.com *.log
+
+The http log indicates the host is at 67.43.1.28.
+
+The biggest difference between the two? This is a little debatable, but these are both good answers:
+- There was no DNS request before visiting aa9pw.com, even though the host field showed the domain name.  That probably means the DNS request was cached on the client, and that the site had been visited recently (unlike www.qrz.com)
+- One shows up in the http log, and the other the ssl log.  If you think about this for a bit (or look at the port numbers) it means that www.qrz.com is actually an encrypted SSK.TLS site, while aa9pw.com is a normal clear-text http server.
+
+Q: What two external IP addresses are communicated with the most?
+A: If you look at conn.log you can see the external address is almost always the responder (makes sense, the firewall is generally blocking inbound connections).  Count up all the responders
+
+cat conn.log | bro-cut id.resp_h | sort | uniq -c | sort -r -n
+
+The top result is our dns server from the first question.  It's internal, so we can throw it out.  The second is 255.255.255.255, a local-link broadcast address.  It's not an external host either.  ff02::fb and 224.0.0.251 are both local multicast dns addresses, so we can throw them out too.  That leaves only two hosts, 204.79.197.213 and 151.101.200.68 with 6 connections each.
+
+Q: What is the most common application protocol present in the packet capture?  What percentage of the connections does this protocol represent?
+A: There are a couple ways to do this, and depending on how you do it you can come up with one of two different answers.  That doesn't mean either of them are wrong.
+
+The first way is to trust Bro's service field to identify the application protocol.  It's easy enough to just count all the occurrences of different protocols in that field.
+
+cat conn.log | bro-cut service | sort | uniq -c | sort -n -r
+
+The top result is - (or unidentified), which is a find answer in and of itself.  The first identified protocol is dns, which is also a fine answer.  
+
+The second way to go about it is to identify the protocol via the server port.
+
+cat conn.log | bro-cut id.resp_p | sort -n | uniq -c | sort -n -r
+
+Here port 443, or SSL/TLS comes way out on top.  That's also a reasonable answer.  The difference becomes clearer when we look at both the port and service together
+
+cat conn.log | bro-cut id.resp_p service | sort | uniq -c | sort -r -n
+
+The top hit here is port 443 with an unidentified service.  This question is really here to illustrate a point: Bro doesn't always identify the protocol correctly in a number of cases.  If you dig pretty deep into this one, looking at the conn_state field in conn.log for these misidentified connections you find a lot of them were "midstream" connections, meaning they were in process when the packet capture started.  This is, by the way, what happens when your wife is already watching Netflix when you're trying to come up with examples for your upcoming Bro workshop.
+
+ 
+
