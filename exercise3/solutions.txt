@@ -1,0 +1,40 @@
+Q: A script is being loaded that adds the MD5 and SHA1 hashes for all observed files to files.log.  Add SHA256 hashes as well.
+A: This is kind of a monkey-see, monkey-do question.  The question refers to an existing script, policy/frameworks/files/hash-all-files.  You can take a look at that script (/opt/bro/share/bro/policy/frameworks/files/hash-all-files.bro) and see that it's REALLY simple.  There are only 4 significant lines.  It's also not obvious, but SHA256 file hash is already implemented in Bro, it's just not enabled by default.  The super-simple way to do this is to just add another line to that file, so it ends up looking like this:
+
+@load base/files/hash
+
+event file_new(f: fa_file)
+        {
+        Files::add_analyzer(f, Files::ANALYZER_MD5);
+        Files::add_analyzer(f, Files::ANALYZER_SHA1);
+        Files::add_analyzer(f, Files::ANALYZER_SHA256);
+        }
+
+If you're using the shared system you don't have permission to edit that file, though.  The better way to do it is to copy that file, and add your own event hook that invokes the SHA256 analyzer like so:
+
+@load base/files/hash
+
+event file_new(f: fa_file) 
+	{
+	Files::add_analyzer(f, Files::ANALYZER_SHA256);
+	}
+
+This can be entered in a new bro file (hash256.bro or whatever you want to call it) and loaded via the command line.  The hash will show up in files.log along with the md5 and sha1.
+
+Q: Write a Bro script to print the number of connections when finished processing a capture file.
+A: The key here is figuring out the right events you need to hook and the associated syntax.  To figure out the events I strongily recommend running the policy/misc/dump-events script against a pcap (any pcap).  The two things are to notice are that there's a new_connection event and the last event is called bro_done.  You'll probably want to reference the Bro documentation here to get the arguments for each of the events (even if you ignore them):
+https://www.bro.org/sphinx/scripts/base/bif/event.bif.bro.html
+
+From there you end up with a Bro script like this: 
+
+@load base/protocols/conn
+global num_connections = 0;
+
+event new_connection(c: connection) {
+    num_connections += 1;
+}
+
+event bro_done() {
+    print(num_connections);
+}
+ 

@@ -1,0 +1,3 @@
+A script is being loaded that adds the MD5 and SHA1 hashes for all observed files to files.log.  Add SHA256 hashes as well.
+
+Write a Bro script to print the number of connections when finished processing a capture file.
