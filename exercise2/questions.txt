@@ -1,0 +1,3 @@
+A client downloaded a PDF file from an external server.  The file is no longer available from the remote system, but you have the content in the pcap file.  Extract the file.  
+
+Which internal IPv4 addresses correspond to local-link IPv6 addresses?

@@ -1,0 +1,28 @@
+Q: A client downloaded a PDF file from an external server.  The file is no longer available from the remote system, but you have the content in the pcap file.  Extract the file.
+A: Start by running bro with the extract-all-files script
+
+bro -r exercise2.pcap policy/frameworks/files/extract-all-files
+
+All of the files end up in the "extract_files" subdirectory, but they're named via the timestamp, protocol, and Bro file id
+
+You can cheat here and just use the "file *" command to identify the types of all the files in the directory (there's only one PDF). The Bro way is to take a look at the files.log file, though, specifically the mime_type column.  You can just grep for "pdf" in the log file, and the mime type for the right row will match (application/pdf).  When file extraction is turned on the 3rd to last column will give you the filename of the extracted file.  One step shell command:
+
+cat files.log | bro-cut extracted mime_type | grep pdf
+
+Q: Which internal IPv4 addresses correspond to local-link IPv6 addresses?
+A: Packets from the same host have the same MAC address regardless of the protocol stack being used.  You can use this to link the two address types.  Start by running bro with the mac-logging script loaded
+
+bro -r exercise2.pcap policy/protocols/conn/mac-logging
+
+Create a list of originator MAC and IP addresses
+
+cat conn.log | bro-cut orig_l2_addr id.orig_h | sort | uniq
+
+Anywhere you see two references to the same MAC address with an IPv4 and IPv6 address you know they match up:
+
+192.168.1.23  -> fe80::46d9:e7ff:fef9:69d6
+192.168.1.130 -> fe80::103a:e22c:a1d3:fd0f
+192.168.1.108 -> fe80::1855:580f:a885:37fe
+192.168.1.113 -> fe80::4c2:38e5:ccd6:248a
+192.168.1.129 -> fe80::47d:bfe8:90dc:8ced
+192.168.1.126 -> fe80::18:2b3b:c958:962e
