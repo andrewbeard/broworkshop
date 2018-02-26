@@ -4,7 +4,7 @@ These are the materials from a workshop on the [Bro IDS](https://www.bro.org/) o
 
 ## The Virtual Machine
 
-Most of the workshop involves interacting with a Ubuntu virtual machine. This VM is downloadable from Release section in VMware OVA format. If you don't have VMware Player/Workstation/Fusion a 30-day trial is available. At least one attendee said they were able to import the VM successfully using VirtualBox, but I have no idea how well it actually runs. As noted in the presentation the default login for the VM is bro:broUser.
+Most of the workshop involves interacting with a Ubuntu virtual machine. This VM is downloadable from [Release](https://github.com/andrewbeard/broworkshop/releases) section in VMware OVA format. If you don't have VMware Player/Workstation/Fusion a 30-day trial is available. At least one attendee said they were able to import the VM successfully using VirtualBox, but I have no idea how well it actually runs. As noted in the presentation the default login for the VM is bro:broUser.
 
 ## Presentation
 
