@@ -1,17 +1,13 @@
 # Bro Workshop
-
 These are the materials from a workshop on the [Bro IDS](https://www.bro.org/) originally presented at [BSides NoVA](http://www.bsidesnova.org/) 2018.
 
 ## The Virtual Machine
-
 Most of the workshop involves interacting with a Ubuntu virtual machine. This VM is downloadable from [Release](https://github.com/andrewbeard/broworkshop/releases) section in VMware OVA format. If you don't have VMware Player/Workstation/Fusion a 30-day trial is available. At least one attendee said they were able to import the VM successfully using VirtualBox, but I have no idea how well it actually runs. As noted in the presentation the default login for the VM is bro:broUser.
 
 ## Presentation
-
-The slides for the presentation are available in PDF format.  Some of the slides regarding the shared lab system and WiFi network are no longer relevant, however.
+The slides for the presentation are available in PDF format. Some of the slides regarding the shared lab system and WiFi network are no longer relevant, however.
 
 ## Exercises
-
 Each exercise is in a named subdirectory and includes a pcap file, a text file with questions (identical to the ones in the presentation), and a text file with my suggested solution or solutions. Spoiler-free hints are available by contacting me per the feedback section below.
 
 ## Feedback
@@ -22,3 +18,8 @@ All nonconstructive criticism and flames may be sent to:
 1701 JFK Boulevard
 Philadelphia, PA 19103
 ```
+
+## Licensing
+All exercises, pcaps, questions, solutions, and Bro scripts are available under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) license. All materials subject to copyright under the docs directory are subject to the original licenses of the copyright holders as stated there. Want to use something under a license that allows commercial use? No problem, just get in touch with me.
+
+The presentation is available under the [Creative Commons Attribution-NoDerivatives 4.0](https://creativecommons.org/licenses/by-nd/4.0/) license. Why the no derivatives license difference?  Long story short, I don't feel comfortable having people modify a presentation and redistributing it with my employer's logo on it.  If you'd like to modify the presentation just get in touch with me and I can send you a PowerPoint file with the template removed under a more permissive license.  
