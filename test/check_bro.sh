@@ -11,6 +11,6 @@ if [ -e conn.log -a "$NUM_LINES" -ne "$EXP" ]; then
   exit 1
 fi
 
-rm *.log
-rm -r .state
+# Cleanup junk files
+rm -rf *.log .state
 echo "Passed!"
