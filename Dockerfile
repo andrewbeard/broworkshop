@@ -24,6 +24,3 @@ ENV PATH $BRO_HOME/bin/:$PATH
 RUN pip install bro-pkg
 RUN bro-pkg autoconfig
 RUN echo "@load packages" >> /opt/bro/share/bro/site/local.bro
-
-# Add the workshop files to the image
-COPY . /root/broworkshop

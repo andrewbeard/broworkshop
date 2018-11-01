@@ -1,5 +1,5 @@
 # Bro Workshop
-These are the materials from a workshop on the [Bro IDS](https://www.bro.org/) originally presented at [BSides NoVA](http://www.bsidesnova.org/) 2018.
+These are the materials from a workshop on the [Bro IDS](https://www.bro.org/) originally presented at [BSides NoVA](http://www.bsidesnova.org/) 2018 and later at [BSides Charleston](http://www.bsidescharleston.com/) 2018.
 
 ## The Virtual Machine
 Most of the workshop involves interacting with a Ubuntu virtual machine. This VM is downloadable from [Release](https://github.com/andrewbeard/broworkshop/releases) section in VMware OVA format. If you don't have VMware Player/Workstation/Fusion a 30-day trial is available. At least one attendee said they were able to import the VM successfully using VirtualBox, but I have no idea how well it actually runs. As noted in the presentation the default login for the VM is bro:broUser.
@@ -9,7 +9,7 @@ My Docker-fu is weak, but I've tried to put together a Dockerfile that can be us
 
 ```
 docker build -t broworkshop .
-docker run -it broworkshop
+docker run -it --mount type=bind,source=$(pwd),target=/root/workshop broworkshop
 ```
 
 ## Presentation
