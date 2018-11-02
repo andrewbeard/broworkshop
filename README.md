@@ -12,7 +12,7 @@ docker build -t broworkshop .
 docker run -it --mount type=bind,source=$(pwd),target=/root/workshop broworkshop
 ```
 
-On the other hand if you don't really care how the sausage is made and just want a working environment you can pull the prebuilt image from the Docker Hub (faster and probably less bandwith than building it locally). You'll still want to run from within the repo so the bind copies over the lastest workshop files, though:
+On the other hand if you don't really care how the sausage is made and just want a working environment you can pull the prebuilt image from the Docker Hub (faster and probably less bandwith than building it locally). You'll still want to run from within the repo so the bind uses the latest workshop files, though:
 
 ```
 docker run -it --mount type=bind,source=$(pwd),target=/root/workshop bearda/broworkshop
