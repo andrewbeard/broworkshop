@@ -5,7 +5,7 @@ LABEL maintainer Andrew Beard <bearda@gmail.com>
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y --no-install-recommends apt-utils && \
-    apt-get install -y --no-install-recommends git software-properties-common wget python-pip python-setuptools
+    apt-get install -y --no-install-recommends git software-properties-common wget python-pip python-setuptools less nano vim
 RUN pip install --upgrade pip
 
 # Add the official Bro package repository and install Bro
