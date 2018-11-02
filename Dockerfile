@@ -6,6 +6,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y --no-install-recommends apt-utils && \
     apt-get install -y --no-install-recommends git software-properties-common wget python-pip python-setuptools
+RUN pip install --upgrade pip
 
 # Add the official Bro package repository and install Bro
 RUN wget -q http://download.opensuse.org/repositories/network:bro/xUbuntu_16.04/Release.key -O Release.key && \
