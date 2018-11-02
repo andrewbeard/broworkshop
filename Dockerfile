@@ -19,7 +19,6 @@ ENV BRO_HOME /opt/bro
 ENV PATH $BRO_HOME/bin/:$PATH
 
 # Install the Bro package manager
-RUN pip install --upgrade pip && \
-    pip install bro-pkg
+RUN pip install bro-pkg
 RUN bro-pkg autoconfig && \
     echo "@load packages" >> /opt/bro/share/bro/site/local.bro
