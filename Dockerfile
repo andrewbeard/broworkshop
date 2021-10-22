@@ -1,25 +1,24 @@
-FROM ubuntu:16.04
+FROM ubuntu:20.04
 
 LABEL maintainer Andrew Beard <bearda@gmail.com>
 
 ARG DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y --no-install-recommends apt-utils && \
-    apt-get install -y --no-install-recommends git software-properties-common wget python-pip python-setuptools less nano vim
-RUN pip install --upgrade pip
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends wget ca-certificates gpg gpg-agent && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-# Add the official Bro package repository and install Bro
-RUN wget -q http://download.opensuse.org/repositories/network:bro/xUbuntu_16.04/Release.key -O Release.key && \
-    apt-key add Release.key && \
-    rm -f Release.key && \
-    apt-add-repository -y 'deb http://download.opensuse.org/repositories/network:/bro/xUbuntu_16.04/ /' && \
+# Add the official Zeek package repository and install Zeek
+RUN wget -q -O- "https://download.opensuse.org/repositories/security:zeek/xUbuntu_20.04/Release.key" | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - && \
+    echo "deb http://download.opensuse.org/repositories/security:/zeek/xUbuntu_20.04/ /" >> /etc/apt/sources.list.d/zeek.list && \
     apt-get update && \
-    apt-get install -y --no-install-recommends bro
+    apt-get install -y --no-install-recommends git less nano zeek && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-ENV BRO_HOME /opt/bro
-ENV PATH $BRO_HOME/bin/:$PATH
+ENV ZEEK_HOME /opt/zeek
+ENV PATH $ZEEK_HOME/bin/:$PATH
 
-# Install the Bro package manager
-RUN pip install bro-pkg
-RUN bro-pkg autoconfig && \
-    echo "@load packages" >> /opt/bro/share/bro/site/local.bro
+# Set up the Zeek package manager
+RUN zkg autoconfig && \
+    echo "@load packages" >> /opt/zeek/share/zeek/site/local.bro
