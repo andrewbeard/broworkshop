@@ -12,7 +12,7 @@ RUN apt-get update && \
 RUN curl -fsSL 'https://download.opensuse.org/repositories/security:zeek/xUbuntu_22.04/Release.key' | gpg --dearmor | tee /etc/apt/trusted.gpg.d/security_zeek.gpg > /dev/null && \
     echo 'deb http://download.opensuse.org/repositories/security:/zeek/xUbuntu_22.04/ /' | tee /etc/apt/sources.list.d/security:zeek.list && \
     apt-get update && \
-    apt-get install -y --no-install-recommends git less nano vim zeek && \
+    apt-get install -y --no-install-recommends git less nano vim zeek-core zeekctl zeek-zkg && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
