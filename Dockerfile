@@ -23,6 +23,6 @@ ENV PATH $ZEEK_HOME/bin/:$PATH
 RUN zkg autoconfig && \
     echo "@load packages" >> /opt/zeek/share/zeek/site/local.bro
 
-RUN mkdir -p /root/broworkshop
-COPY . /root/broworkshop/
-WORKDIR /root/broworkshop
+RUN mkdir -p /root/workshop
+COPY . /root/workshop/
+WORKDIR /root/workshop
