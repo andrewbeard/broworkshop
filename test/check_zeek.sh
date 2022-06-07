@@ -1,8 +1,10 @@
 #/bin/bash
 
-BRO_HOME="/opt/bro"
-
-$BRO_HOME/bin/bro -C -r test.pcap
+$ZEEK_HOME/bin/zeek -C -r test.pcap
+if [ $? -ne 0 ]; then
+  echo "Error running Zeek!"
+  exit 1
+fi
 NUM_LINES=`wc -l conn.log | awk '{print $1}'`
 EXP=17
 
