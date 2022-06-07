@@ -1,0 +1,5 @@
+launch_docker.sh
+presentation
+Dockerfile
+.dockerignore
+.git
