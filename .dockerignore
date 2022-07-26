@@ -3,3 +3,4 @@ presentation
 Dockerfile
 .dockerignore
 .git
+.github
