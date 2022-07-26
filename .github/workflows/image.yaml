@@ -16,7 +16,7 @@ jobs:
         with:
           version: latest
       - name: build the image
-      run: |
-        docker buildx build \
-          --tag bearda/broworkshop:latest \
-          --platform linux/amd64,linux/arm64 .
+        run: |
+          docker buildx build \
+            --tag bearda/broworkshop:latest \
+            --platform linux/amd64,linux/arm64 .
