@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 LABEL maintainer Andrew Beard <bearda@gmail.com>
 
@@ -9,8 +9,8 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Add the official Zeek package repository and install Zeek
-RUN curl -fsSL 'https://download.opensuse.org/repositories/security:zeek/xUbuntu_20.04/Release.key' | gpg --dearmor | tee /etc/apt/trusted.gpg.d/security_zeek.gpg > /dev/null && \
-    echo 'deb http://download.opensuse.org/repositories/security:/zeek/xUbuntu_20.04/ /' | tee /etc/apt/sources.list.d/security:zeek.list && \
+RUN curl -fsSL 'https://download.opensuse.org/repositories/security:zeek/xUbuntu_22.04/Release.key' | gpg --dearmor | tee /etc/apt/trusted.gpg.d/security_zeek.gpg > /dev/null && \
+    echo 'deb http://download.opensuse.org/repositories/security:/zeek/xUbuntu_22.04/ /' | tee /etc/apt/sources.list.d/security:zeek.list && \
     apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y --no-install-recommends git less nano zeek-core zeekctl zeek-zkg && \
