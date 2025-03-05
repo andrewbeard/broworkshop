@@ -1,6 +1,6 @@
 FROM ubuntu:22.04
 
-LABEL maintainer Andrew Beard <bearda@gmail.com>
+LABEL maintainer="Andrew Beard <bearda@gmail.com>"
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
@@ -17,8 +17,8 @@ RUN curl -fsSL 'https://download.opensuse.org/repositories/security:zeek/xUbuntu
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-ENV ZEEK_HOME /opt/zeek
-ENV PATH $ZEEK_HOME/bin/:$PATH
+ENV ZEEK_HOME=/opt/zeek
+ENV PATH="$ZEEK_HOME/bin/:$PATH"
 
 # Set up the Zeek package manager
 RUN zkg autoconfig && \
