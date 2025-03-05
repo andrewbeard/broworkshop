@@ -21,6 +21,6 @@ jobs:
       - name: build the image
         run: |
           docker buildx build --push \
-            --attest type=provenance,mode=max \
+            --attest type=provenance,mode=min \
             --tag bearda/broworkshop:latest \
             --platform linux/amd64,linux/arm64 .
